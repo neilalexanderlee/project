@@ -4,25 +4,22 @@ const webpack = require('webpack'),
 	 
 module.exports={
 	entry: {
-		dashboard:path.resolve(__dirname, "./src/main/webapp/apps/brokerage/js/main.js")
+		dashboard:path.resolve(__dirname, "/src/main/webapp/app/main.js")
 	},
 	output:{
-		path: path.resolve(__dirname, "./src/main/webapp/apps/brokerage/build"),
+		path: path.resolve(__dirname, "/src/main/webapp/build"),
 		//filename: "[name].[chunkHash:8].js",
 		filename: "[name].js",
 		publicPath: "/build/"
 	},
 	module:{
+        //loaders加载器
 		loaders:[
 			{test: /\.css$/, loader: "style!css"},
 			{
-				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
-				loader: 'babel',
-				query: {
-				  presets: ['es2015'],
-				  plugins: ["transform-class-properties"]
-				}
+                test: /\.(js|jsx)$/,//一个匹配loaders所处理的文件的拓展名的正则表达式，这里用来匹配js和jsx文件（必须）
+				exclude: /(node_modules|bower_components)/,//屏蔽不需要处理的文件（文件夹）（可选）
+				loader: 'babel'//loader的名称（必须）
 			},
 			{test: /\.(jpg|png)$/, loader: "url?limit=8192"}
 		]
