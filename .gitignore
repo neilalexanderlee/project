@@ -13,6 +13,3 @@ npm-debug.log*
 
 # logs
 /logs
-
-# target
-/target
