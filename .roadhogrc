@@ -1,0 +1,18 @@
+{
+  "entry": "src/web/index.js",
+  "outputPath": "src/main/webapp/dist",
+  "publicPath": "/dist/",
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+        "dva-hmr",
+        "transform-runtime"
+      ]
+    },
+    "production": {
+      "extraBabelPlugins": [
+        "transform-runtime"
+      ]
+    }
+  }
+}
