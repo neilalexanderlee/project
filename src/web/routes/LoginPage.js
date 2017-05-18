@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Card } from 'antd';
 import LoginForm from '../components/LoginForm';
-import styles from './LoginPage.less';
+import styles from './style/LoginPage.less';
 
 const { Header, Footer, Content } = Layout;
 
