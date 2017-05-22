@@ -4,7 +4,7 @@ export default {
     confirmDirty: false,
   },
   reducers: {
-    update(state, { payload: value }) {
+    updateConfirmDirty(state, { payload: value }) {
       const confirmDirty = state.confirmDirty || value;
       return { ...state, confirmDirty };
     },

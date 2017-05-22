@@ -39,11 +39,11 @@ class LoginForm extends React.Component {
           })(
             <Checkbox>记住我</Checkbox>
           )}
-          <Link to="/products" className={styles.forgot}>忘记密码?</Link>
+          <Link to="/userRole" className={styles.forgot}>忘记密码?</Link>
           <Button size="large" type="primary" htmlType="submit" className={styles.button}>
             登录
           </Button>
-          <Link to="/products">立即注册</Link>
+          <Link to="/register">立即注册</Link>
         </FormItem>
       </Form>
     );
