@@ -22,14 +22,14 @@ class LoginForm extends React.Component {
           {getFieldDecorator('userName', {
             rules: [{ required: true, message: '请输入账号!' }],
           })(
-            <Input size="large" className={styles.input} addonBefore={<Icon type="user" style={{ fontSize: 16 }} />} placeholder="用户名/手机号/邮箱" />
+            <Input className={styles.input} addonBefore={<Icon type="user" style={{ fontSize: 16 }} />} placeholder="用户名/手机号/邮箱" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: '请输入密码!' }],
           })(
-            <Input size="large" className={styles.input} addonBefore={<Icon type="lock" style={{ fontSize: 16 }} />} type="password" placeholder="密码" />
+            <Input className={styles.input} addonBefore={<Icon type="lock" style={{ fontSize: 16 }} />} type="password" placeholder="密码" />
           )}
         </FormItem>
         <FormItem>
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
             <Checkbox>记住我</Checkbox>
           )}
           <Link to="/userRole" className={styles.forgot}>忘记密码?</Link>
-          <Button size="large" type="primary" htmlType="submit" className={styles.button}>
+          <Button type="primary" htmlType="submit" className={styles.button}>
             登录
           </Button>
           <Link to="/register">立即注册</Link>

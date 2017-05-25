@@ -1,21 +1,16 @@
 import React from 'react';
-import { Layout, Card } from 'antd';
+import { Card } from 'antd';
 import LoginForm from '../components/LoginForm';
+import Frame from '../components/Frame';
 import styles from './style/LoginPage.less';
-
-const { Header, Footer, Content } = Layout;
 
 const LoginPage = () => {
   return (
-    <Layout className={styles.layout}>
-      <Header />
-      <Content>
-        <Card className={styles.card} bodyStyle={{ padding: '64px' }}>
-          <LoginForm />
-        </Card>
-      </Content>
-      <Footer className={styles.footer} />
-    </Layout>
+    <Frame showMenu={false}>
+      <Card className={styles.card} bodyStyle={{ padding: '64px' }}>
+        <LoginForm />
+      </Card>
+    </Frame>
   );
 };
 

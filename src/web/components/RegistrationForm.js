@@ -1,6 +1,7 @@
 import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, message } from 'antd';
 import React from 'react';
 import { connect } from 'dva';
+import styles from './style/RegistrationForm.less';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -49,13 +50,13 @@ class RegistrationForm extends React.Component {
         // <768px 响应式栅格
         xs: { span: 24 },
         // ≥768px 响应式栅格
-        sm: { span: 6 },
+        sm: { span: 8 },
       },
       wrapperCol: {
         // <768px 响应式栅格
         xs: { span: 24 },
         // ≥768px 响应式栅格
-        sm: { span: 14 },
+        sm: { span: 8 },
       },
     };
     const tailFormItemLayout = {
@@ -68,7 +69,7 @@ class RegistrationForm extends React.Component {
         // ≥768px 响应式栅格
         sm: {
           span: 14,
-          offset: 6, // 栅格左侧的间隔格数，间隔内不可以有栅格
+          offset: 8, // 栅格左侧的间隔格数，间隔内不可以有栅格
         },
       },
     };
@@ -81,10 +82,11 @@ class RegistrationForm extends React.Component {
     );
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} className={styles.form}>
         <FormItem
           {...formItemLayout}
           label="邮箱"
+          colon={false}
           hasFeedback
         >
           {getFieldDecorator('email', {
@@ -100,6 +102,7 @@ class RegistrationForm extends React.Component {
         <FormItem
           {...formItemLayout}
           label="密码"
+          colon={false}
           hasFeedback
         >
           {getFieldDecorator('password', {
@@ -115,6 +118,7 @@ class RegistrationForm extends React.Component {
         <FormItem
           {...formItemLayout}
           label="确认密码"
+          colon={false}
           hasFeedback
         >
           {getFieldDecorator('confirm', {
@@ -137,6 +141,7 @@ class RegistrationForm extends React.Component {
               </Tooltip>
             </span>
           )}
+          colon={false}
           hasFeedback
         >
           {getFieldDecorator('nickname', {
@@ -148,6 +153,7 @@ class RegistrationForm extends React.Component {
         <FormItem
           {...formItemLayout}
           label="手机号"
+          colon={false}
         >
           {getFieldDecorator('phone', {
             rules: [{
@@ -161,11 +167,11 @@ class RegistrationForm extends React.Component {
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',
           })(
-            <Checkbox>我已阅读 <a href="">承诺书</a></Checkbox>
+            <Checkbox>我已阅读 <a href="/">承诺书</a></Checkbox>
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" size="large">注册</Button>
+          <Button type="primary" htmlType="submit">注册</Button>
         </FormItem>
       </Form>
     );

@@ -5,10 +5,6 @@ import './index.html';
 // 1. Initialize
 const app = dva({
   initialState: {
-    products: [
-      { name: 'dva', id: 1 },
-      { name: 'antd', id: 2 },
-    ],
   },
   onError(e) {
     console.log(e.message);
@@ -19,8 +15,8 @@ const app = dva({
 // app.use({});
 
 // 3. Model
-app.model(require('./models/products'));
 app.model(require('./models/registration.js'));
+app.model(require('./models/frame.js'));
 
 // 4. Router
 app.router(require('./router'));
