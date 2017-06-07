@@ -1,5 +1,5 @@
 export default {
-  namespace: 'frame',
+  namespace: 'menu',
   state: {
     collapsed: false,
     mode: 'inline',

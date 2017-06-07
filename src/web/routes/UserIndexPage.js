@@ -6,7 +6,7 @@ const { Content } = Layout;
 const IndexPage = () => {
   return (
     <Content>
-      This is Main Index
+      This is user Index
     </Content>);
 };
 

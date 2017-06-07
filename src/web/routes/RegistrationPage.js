@@ -1,12 +1,14 @@
 import React from 'react';
-import Frame from '../components/Frame';
+import { Layout } from 'antd';
 import RegistrationForm from '../components/RegistrationForm';
+
+const { Content } = Layout;
 
 const RegistrationPage = () => {
   return (
-    <Frame showMenu={false}>
+    <Content>
       <RegistrationForm />
-    </Frame>
+    </Content>
   );
 };
 

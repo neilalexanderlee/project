@@ -1,7 +1,7 @@
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { Link } from 'dva/router';
 import { connect } from 'dva';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './style/LoginForm.less';
 
 const FormItem = Form.Item;
@@ -40,13 +40,22 @@ const LoginForm = ({ form: { getFieldDecorator }, handleSubmit }) => {
   );
 };
 
-function mapDispatchToProps(dispatch, { from: { validateFields } }) {
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
+
+function mapDispatchToProps(dispatch, { form: { validateFields } }) {
   return {
     handleSubmit: (e) => {
       e.preventDefault();
       validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+          dispatch({
+            type: 'user/login',
+            payload: { userName: values.userName,
+              isAdmin: values.remember },
+          });
         }
       });
     },

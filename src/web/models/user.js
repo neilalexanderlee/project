@@ -5,8 +5,8 @@ export default {
     login(state, { payload: user }) {
       return user;
     },
-    logout(state, { payload: user }) {
-      console.log(user);
+    logout(state) {
+      console.log(state);
       return {};
     },
   },

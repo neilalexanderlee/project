@@ -16,7 +16,8 @@ const app = dva({
 
 // 3. Model
 app.model(require('./models/registration.js'));
-app.model(require('./models/frame.js'));
+app.model(require('./models/menu.js'));
+app.model(require('./models/user.js'));
 
 // 4. Router
 app.router(require('./router'));

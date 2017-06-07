@@ -1,5 +1,5 @@
 import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, message } from 'antd';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'dva';
 import styles from './style/RegistrationForm.less';
 
@@ -154,6 +154,12 @@ const RegistrationForm = ({ registration,
       </FormItem>
     </Form>
   );
+};
+
+RegistrationForm.propTypes = {
+  registration: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleConfirmBlur: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ registration }) {

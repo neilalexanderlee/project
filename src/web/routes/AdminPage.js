@@ -3,11 +3,11 @@ import { Layout } from 'antd';
 
 const { Content } = Layout;
 
-const IndexPage = () => {
+const AdminPage = () => {
   return (
     <Content>
-      This is Main Index
+      This is Admin Index
     </Content>);
 };
 
-export default IndexPage;
+export default AdminPage;

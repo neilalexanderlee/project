@@ -1,10 +1,10 @@
 import React from 'react';
-import Frame from '../components/Frame';
+import { Layout } from 'antd';
+
+const { Content } = Layout;
 
 const UserRoleSettingPage = () => {
-  return (
-    <Frame showMenu />
-  );
+  return <Content />;
 };
 
 export default UserRoleSettingPage;
