@@ -29,5 +29,8 @@
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
+  },
+  "env": {
+    "browser": true
   }
 }

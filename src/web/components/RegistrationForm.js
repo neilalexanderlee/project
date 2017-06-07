@@ -1,4 +1,4 @@
-import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, message } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 import React, { PropTypes } from 'react';
 import { connect } from 'dva';
 import styles from './style/RegistrationForm.less';
@@ -142,13 +142,13 @@ const RegistrationForm = ({ registration,
           <Input addonBefore={prefixSelector} />
         )}
       </FormItem>
-      <FormItem {...tailFormItemLayout} style={{ marginBottom: 8 }}>
+      {/* <FormItem {...tailFormItemLayout} style={{ marginBottom: 8 }}>
         {getFieldDecorator('agreement', {
           valuePropName: 'checked',
         })(
           <Checkbox>我已阅读 <a href="/">承诺书</a></Checkbox>
         )}
-      </FormItem>
+      </FormItem> */}
       <FormItem {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">注册</Button>
       </FormItem>
@@ -168,16 +168,15 @@ function mapStateToProps({ registration }) {
   };
 }
 
-function mapDispatchToProps(dispatch, { form: { getFieldValue,
-  validateFieldsAndScroll } }) {
+function mapDispatchToProps(dispatch, { form: { validateFieldsAndScroll } }) {
   return {
     handleSubmit: (e) => {
       e.preventDefault();
-      if (!getFieldValue('agreement')) {
-        message.warning('请先阅读并同意承诺书!');
-        return;
-      }
       validateFieldsAndScroll((err, values) => {
+        /* if (!values.agreement) {
+          message.warning('请先阅读并同意承诺书!');
+          return;
+        } */
         if (!err) {
           console.log('Received values of form: ', values);
         }

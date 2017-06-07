@@ -11,6 +11,7 @@ const LoginForm = ({ form: { getFieldDecorator }, handleSubmit }) => {
     <Form onSubmit={handleSubmit} className={styles.form}>
       <FormItem>
         {getFieldDecorator('userName', {
+          initialValue: localStorage.getItem('userName'), // 使用localStorage保存用户名
           rules: [{ required: true, message: '请输入账号!' }],
         })(
           <Input className={styles.input} addonBefore={<Icon type="user" style={{ fontSize: 16 }} />} placeholder="用户名/手机号/邮箱" />
@@ -26,11 +27,11 @@ const LoginForm = ({ form: { getFieldDecorator }, handleSubmit }) => {
       <FormItem>
         {getFieldDecorator('remember', {
           valuePropName: 'checked',
-          initialValue: false,
+          initialValue: !!localStorage.getItem('userName'),
         })(
           <Checkbox>记住我</Checkbox>
         )}
-        <Link to="/userRole" className={styles.forgot}>忘记密码?</Link>
+        {/* <Link to="/" className={styles.forgot}>忘记密码?</Link> */}
         <Button type="primary" htmlType="submit" className={styles.button}>
           登录
         </Button>
@@ -51,10 +52,14 @@ function mapDispatchToProps(dispatch, { form: { validateFields } }) {
       validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+          if (values.remember) {
+            localStorage.setItem('userName', values.userName);
+          } else {
+            localStorage.removeItem('userName');
+          }
           dispatch({
             type: 'user/login',
-            payload: { userName: values.userName,
-              isAdmin: values.remember },
+            payload: values,
           });
         }
       });
