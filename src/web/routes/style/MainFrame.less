@@ -14,27 +14,28 @@
 }
 
 .header{
-  filter:alpha(Opacity=70);
-  -moz-opacity:0.7;
-  opacity: 0.7;
+  filter:alpha(Opacity=60);
+  -moz-opacity:0.6;
+  opacity: 0.6;
+  padding: 0 10px;
 }
 
-.loginInfo{
+.header a, .header span{
+  color:#fff;
   font-size:14px;
 }
 
-.loginInfo p,a{
-  padding:0 10px;
+.header a:hover{
+  color: #49a9ee;
 }
 
-.welcomeInfo{
+:global(.fr){
   float:right;
-  font-size:14px;
-  color:yellowgreen;
 }
 
-.logoutWrapper{
-  float:right;
+:global(.fr li){
+  float:left;
+  padding:0 5px;
 }
 
 

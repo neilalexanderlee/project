@@ -13,32 +13,34 @@ const MainFrame = ({ children, user, isAuthenticated, logout }) => {
     <Layout className={frameStyle.layout}>
       <Header className={frameStyle.header}>
         <Row>
-          <Col span={12}>
+          <Col sm={12} xs={8}>
             <IndexLink to="/">
               <img src={require('../assets/logo.png')} alt="logo" className={frameStyle.logo} />
             </IndexLink>
           </Col>
-          <Col span={6} offset={3}>
-            <div className={frameStyle.welcomeInfo}>
-              <em>欢迎您{isAuthenticated ? `，${user.userName}` : ''}</em>
-            </div>
-          </Col>
-          <Col span={3}>
-            <div className={frameStyle.loginInfo}>
-              <p>
-                {isAuthenticated ?
-                  <div className={frameStyle.logoutWrapper}>
-                    <OnlyAdminLink />
-                    <Button type="primary" shape="circle" icon="logout" onClick={logout} />
-                  </div>
-                  :
-                  <div>
+          <Col sm={{ span: 9, offset: 3 }} xs={16}>
+            <ul className="fr">
+              <li>
+                <span>欢迎您{isAuthenticated ? ` ${user.userName}` : ''}</span>
+              </li>
+              <li>{isAuthenticated ?
+                <div>
+                  <OnlyAdminLink />
+                  <Button type="primary" shape="circle" icon="logout" onClick={logout} />
+                </div>
+                :
+                <ul className="fr">
+                  <li>
                     <Link to="/login">登录</Link>
+                  </li>
+                  <li><span>|</span></li>
+                  <li>
                     <Link to="/register">注册</Link>
-                  </div>
-                }
-              </p>
-            </div>
+                  </li>
+                </ul>
+              }
+              </li>
+            </ul>
           </Col>
         </Row>
       </Header>
