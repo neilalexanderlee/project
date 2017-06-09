@@ -12,6 +12,9 @@ const MenuFrame = ({ menu, children, onCollapse }) => {
         collapsible
         collapsed={menu.collapsed}
         onCollapse={onCollapse}
+        width="227.66"
+        breakpoint="sm"
+        collapsedWidth="113.83"
       >
         <Menu theme="dark" mode={menu.mode} defaultSelectedKeys={['1']}>
           <SubMenu

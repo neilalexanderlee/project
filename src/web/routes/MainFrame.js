@@ -1,25 +1,47 @@
 import React from 'react';
-import { Layout, Button, Row, Col } from 'antd';
+import { Layout, Icon, Dropdown, Menu, Row, Col } from 'antd';
 import { connect } from 'dva';
 import { IndexLink, Link } from 'dva/router';
 import frameStyle from './style/MainFrame.less';
-import { VisibleOnlyAdmin } from '../utils/wrappers';
+/* import { VisibleOnlyAdmin } from '../utils/wrappers'; */
 
-const { Header, Footer } = Layout;
-const OnlyAdminLink = VisibleOnlyAdmin(() => <Link to="/app/admin">管理员</Link>);
+const { Header } = Layout;
+/* const OnlyAdminLink = VisibleOnlyAdmin(() => <Link to="/app/admin">管理员</Link>); */
 
 const MainFrame = ({ children, user, isAuthenticated, logout }) => {
+  const accountMenu = (
+    <Menu style={{ width: 150, textAlign: 'center' }} className={frameStyle.accountMenu}>
+      <Menu.Item>{user.userName}</Menu.Item>
+      <Menu.Item><a onClick={logout}>登出</a></Menu.Item>
+    </Menu>
+  );
   return (
     <Layout className={frameStyle.layout}>
       <Header className={frameStyle.header}>
         <Row>
-          <Col sm={12} xs={8}>
-            <IndexLink to="/">
-              <img src={require('../assets/logo.png')} alt="logo" className={frameStyle.logo} />
-            </IndexLink>
+          <Col sm={2} xs={8}>
+            <div className={frameStyle.logoWrapper}>
+              <IndexLink to="/">
+                <img src={require('../assets/logo.png')} alt="logo" />
+              </IndexLink>
+            </div>
           </Col>
-          <Col sm={{ span: 9, offset: 3 }} xs={16}>
-            <ul className="fr">
+          <Col sm={2} xs={8}>
+            <div className={frameStyle.logoWrapper}>
+              管理平台
+            </div>
+          </Col>
+          <Col sm={{ span: 2, offset: 18 }} xs={8}>
+            {isAuthenticated ?
+              <Dropdown overlay={accountMenu} placement="bottomRight">
+                <span>
+                  <Icon type="user" /><Icon type="down" />
+                </span>
+              </Dropdown>
+              :
+              <Link to="/login">登录</Link>
+            }
+            {/* <ul className="fr">
               <li>
                 <span>欢迎您{isAuthenticated ? ` ${user.userName}` : ''}</span>
               </li>
@@ -40,12 +62,12 @@ const MainFrame = ({ children, user, isAuthenticated, logout }) => {
                 </ul>
               }
               </li>
-            </ul>
+            </ul> */}
           </Col>
         </Row>
       </Header>
       {children}
-      <Footer className={frameStyle.footer} />
+      {/* <Footer className={frameStyle.footer} /> */}
     </Layout>
   );
 };
