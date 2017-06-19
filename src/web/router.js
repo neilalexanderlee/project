@@ -8,6 +8,7 @@ import {
   UserIndexPage,
   RegistrationPage,
   UserRoleSettingPage,
+  RoleSettingPage,
   AdminPage } from './routes';
 import { UserIsAuthenticated, UserIsAdmin } from './utils/wrappers.js';
 
@@ -20,6 +21,7 @@ function RouterConfig({ history }) {
         <Route path="register" component={RegistrationPage} />
         <Route path="app" component={MenuFrame}>
           <IndexRoute component={UserIndexPage} />
+          <Route path="role" component={UserIsAuthenticated(RoleSettingPage)} />
           <Route path="userRole" component={UserIsAuthenticated(UserRoleSettingPage)} />
           <Route path="admin" component={UserIsAuthenticated(UserIsAdmin(AdminPage))} />
         </Route>

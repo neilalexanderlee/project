@@ -14,14 +14,14 @@ const LoginForm = ({ form: { getFieldDecorator }, handleSubmit }) => {
           initialValue: localStorage.getItem('userName'), // 使用localStorage保存用户名
           rules: [{ required: true, message: '请输入账号!' }],
         })(
-          <Input className={styles.input} addonBefore={<Icon type="user" style={{ fontSize: 16 }} />} placeholder="用户名/手机号/邮箱" />
+          <Input className={styles.input} style={{ width: '100%' }} addonBefore={<Icon type="user" style={{ fontSize: 16 }} />} placeholder="用户名/手机号/邮箱" />
         )}
       </FormItem>
       <FormItem>
         {getFieldDecorator('password', {
           rules: [{ required: true, message: '请输入密码!' }],
         })(
-          <Input className={styles.input} addonBefore={<Icon type="lock" style={{ fontSize: 16 }} />} type="password" placeholder="密码" />
+          <Input className={styles.input} style={{ width: '100%' }} addonBefore={<Icon type="lock" style={{ fontSize: 16 }} />} type="password" placeholder="密码" />
         )}
       </FormItem>
       <FormItem>

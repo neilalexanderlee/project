@@ -1,4 +1,18 @@
 import fetch from 'dva/fetch';
+import { notification } from 'antd';
+import qs from 'qs';
+
+export function getUrl(url, params) {
+  let urlWithParams = url;
+  if (params) {
+    if (url.search(/\?/) === -1) {
+      urlWithParams = `${url}?${qs.stringify(params)}`;
+    } else {
+      urlWithParams = `${url}&${qs.stringify(params)}`;
+    }
+  }
+  return urlWithParams;
+}
 
 function parseJSON(response) {
   return response.json();
@@ -14,6 +28,22 @@ function checkStatus(response) {
   throw error;
 }
 
+function parseErrorMessage({ status, message, result }) {
+  if (status === 'error') {
+    throw new Error(message);
+  }
+  return result;
+}
+
+function showError(err) {
+  if (err.response) {
+    notification.error({
+      message: '网络连接错误',
+      description: `错误代码:${err.response.status}, ${err.message}`,
+    });
+  }
+}
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -25,6 +55,10 @@ export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
+    .then(parseErrorMessage)
     .then(data => ({ data }))
-    .catch(err => ({ err }));
+    .catch((err) => {
+      showError(err);
+      return { err };
+    });
 }

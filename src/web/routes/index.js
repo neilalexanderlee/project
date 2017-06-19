@@ -6,3 +6,4 @@ export UserIndexPage from './UserIndexPage';
 export RegistrationPage from './RegistrationPage';
 export UserRoleSettingPage from './UserRoleSettingPage';
 export AdminPage from './AdminPage';
+export RoleSettingPage from './RoleSettingPage';

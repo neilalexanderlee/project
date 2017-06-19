@@ -139,7 +139,7 @@ const RegistrationForm = ({ registration,
             type: 'string', message: '请输入正确的手机号', pattern: /^1[34578]\d{9}$/,
           }, { required: true, message: '请输入您的手机号' }],
         })(
-          <Input addonBefore={prefixSelector} />
+          <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
         )}
       </FormItem>
       {/* <FormItem {...tailFormItemLayout} style={{ marginBottom: 8 }}>

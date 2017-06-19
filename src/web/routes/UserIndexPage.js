@@ -1,13 +1,10 @@
 import React from 'react';
-import { Layout } from 'antd';
-
-const { Content } = Layout;
 
 const IndexPage = () => {
   return (
-    <Content>
+    <div>
       This is user Index
-    </Content>);
+    </div>);
 };
 
 export default IndexPage;

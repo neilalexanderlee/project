@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
 
 function mapStateToProps({ user }, ownProps) {
   const isAuthenticated = !!user.userName || false;
-  const redirect = ownProps.location.query.redirect || '/';
+  const redirect = ownProps.location.query.redirect || '/app';
   return {
     isAuthenticated,
     redirect,

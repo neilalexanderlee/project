@@ -1,10 +1,7 @@
 import React from 'react';
-import { Layout } from 'antd';
-
-const { Content } = Layout;
 
 const UserSettingPage = () => {
-  return <Content />;
+  return <div />;
 };
 
 export default UserSettingPage;
