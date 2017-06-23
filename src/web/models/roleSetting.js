@@ -1,4 +1,5 @@
 import { queryRole, queryRoleResources } from '../services/roleSetting';
+import { loop } from '../routes/RoleSettingPage';
 
 export default {
   namespace: 'roleSetting',
@@ -15,6 +16,7 @@ export default {
     tableLoading: false,
     treeLoading: false,
     currentSelectedRecord: {},
+    checkedTreeKeys: [],
   },
   subscriptions: {
     initRoleData({ dispatch, history }) {
@@ -27,6 +29,7 @@ export default {
   },
   effects: {
     *queryRole({ payload: params }, { put, call }) {
+      yield put({ type: 'select', payload: [] });
       yield put({ type: 'setTableLoading', payload: true });
       const { data: { dataList } } = yield call(queryRole);
       yield put({ type: 'setData', payload: dataList });
@@ -35,8 +38,10 @@ export default {
     },
     *queryRoleResources({ payload: roleId }, { put, call }) {
       yield put({ type: 'setTreeLoading', payload: true });
+      const checkedTreeKeys = [];
       const { data: { dataList } } = yield call(queryRoleResources, { roleId });
-      yield put({ type: 'setTreeData', payload: dataList });
+      yield put({ type: 'setTreeData', payload: loop(dataList, checkedTreeKeys) });
+      yield put({ type: 'setCheckedTreeKeys', payload: checkedTreeKeys });
       yield put({ type: 'setTreeLoading', payload: false });
     },
   },
@@ -53,12 +58,6 @@ export default {
     select(state, { payload: selectedRowKeys }) {
       return { ...state, selectedRowKeys };
     },
-    setTreeLoading(state, { payload: treeLoading }) {
-      return { ...state, treeLoading };
-    },
-    setTableLoading(state, { payload: tableLoading }) {
-      return { ...state, tableLoading };
-    },
     setDeleteLoading(state, { payload: deleteButtonLoading }) {
       return { ...state, deleteButtonLoading };
     },
@@ -71,8 +70,17 @@ export default {
     setRoleSearchText(state, { payload: roleSearchText }) {
       return { ...state, roleSearchText };
     },
+    setTableLoading(state, { payload: tableLoading }) {
+      return { ...state, tableLoading };
+    },
+    setTreeLoading(state, { payload: treeLoading }) {
+      return { ...state, treeLoading };
+    },
     setCurrentSelectedRecord(state, { payload: currentSelectedRecord }) {
       return { ...state, currentSelectedRecord };
+    },
+    setCheckedTreeKeys(state, { payload: checkedTreeKeys }) {
+      return { ...state, checkedTreeKeys };
     },
   },
 };

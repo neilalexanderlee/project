@@ -20,7 +20,7 @@ function RouterConfig({ history }) {
         <Route path="login" component={LoginPage} />
         <Route path="register" component={RegistrationPage} />
         <Route path="app" component={MenuFrame}>
-          <IndexRoute component={UserIndexPage} />
+          <IndexRoute component={UserIsAuthenticated(UserIndexPage)} />
           <Route path="role" component={UserIsAuthenticated(RoleSettingPage)} />
           <Route path="userRole" component={UserIsAuthenticated(UserRoleSettingPage)} />
           <Route path="admin" component={UserIsAuthenticated(UserIsAdmin(AdminPage))} />

@@ -16,7 +16,7 @@ const MainFrame = ({ children, user, isAuthenticated, logout }) => {
     </Menu>
   );
   return (
-    <Layout className={frameStyle.layout}>
+    <Layout className={`${frameStyle.layout} ih`}>
       <Header className={frameStyle.header}>
         <Row>
           <Col sm={2} xs={8}>
@@ -83,10 +83,15 @@ function mapStateToProps({ user }) {
   };
 }
 
-const mapDispatchToProps = {
-  logout: () => ({
-    type: 'user/logout',
-  }),
-};
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => {
+      dispatch({
+        type: 'user/logout',
+      });
+      location.reload();
+    },
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainFrame);

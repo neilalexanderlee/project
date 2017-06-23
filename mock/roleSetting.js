@@ -46,22 +46,28 @@ export default {
   'GET /api/roleResources': function (req, res) {
     const treeData = [
       {
-        id: 1,
+        id: '1',
         name: '首页',
-        parentId: 0,
-        granted: true,
+        parentId: '0',
+        granted: 'true',
       },
       {
-        id: 2,
+        id: '2',
         name: '权限管理',
-        parentId: 0,
-        granted: true,
+        parentId: '0',
+        granted: 'true',
         children: [
           {
-            id: 3,
+            id: '3',
             name: '角色管理',
-            parentId: 2,
-            granted: false,
+            parentId: '2',
+            granted: 'false',
+          },
+          {
+            id: '4',
+            name: '用户管理',
+            parentId: '2',
+            granted: 'true',
           },
         ],
       },

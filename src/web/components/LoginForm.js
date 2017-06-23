@@ -61,6 +61,10 @@ function mapDispatchToProps(dispatch, { form: { validateFields } }) {
             type: 'user/login',
             payload: values,
           });
+          dispatch({
+            type: 'menu/queryMenu',
+            payload: values.userName,
+          });
         }
       });
     },

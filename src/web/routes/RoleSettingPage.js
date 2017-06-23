@@ -4,6 +4,20 @@ import { connect } from 'dva';
 
 const { TreeNode } = Tree;
 
+export function loop(paramData, checkedTreeKeys) {
+  return paramData.map((item) => {
+    if (item.granted === 'true') {
+      checkedTreeKeys.push(item.id);
+    }
+    if (item.children) {
+      return (<TreeNode title={item.name} key={item.id}>
+        {loop(item.children, checkedTreeKeys)}
+      </TreeNode>);
+    }
+    return <TreeNode title={item.name} key={item.id} isLeaf={item.parentId !== '0'} />;
+  });
+}
+
 const RoleSettingPage = ({
   roleSetting: {
     data,
@@ -18,15 +32,18 @@ const RoleSettingPage = ({
     tableLoading,
     treeLoading,
     currentSelectedRecord,
+    checkedTreeKeys,
   },
   setShowData,
   getTreeData,
+  setCurrentSelectedRecord,
+  setCheckedTreeKeys,
   changeRoleDropDown,
   setRoleSearchText,
   selectDatas,
   deleteDatas,
   saveDatas,
-  }) => {
+}) => {
   const rowSelection = {
     selectedRowKeys,
     onChange: selectDatas,
@@ -96,59 +113,65 @@ const RoleSettingPage = ({
     }).filter(record => !!record));
   }
   function onRowClick(record) {
-    /* const index = selectedRowKeys.indexOf(record.id);
+    const index = selectedRowKeys.indexOf(record.id);
     if (index !== -1) {
       selectedRowKeys.splice(index, 1);
     } else {
       selectedRowKeys.push(record.id);
+      setCurrentSelectedRecord(record);
+      getTreeData(record);
     }
-    selectDatas(selectedRowKeys); */
-    getTreeData(record);
+    selectDatas(selectedRowKeys);
   }
-  function onSelect(record) {
-    getTreeData(record);
+  function onSelect(record, selected) {
+    if (selected) {
+      setCurrentSelectedRecord(record);
+      getTreeData(record);
+    }
   }
-  function loop(paramData) {
-    return paramData.map((item) => {
-      if (item.children) {
-        return <TreeNode title={item.name} key={item.id}>{loop(item.children)}</TreeNode>;
-      }
-      return <TreeNode title={item.name} key={item.id} isLeaf={item.parentId !== 0} />;
-    });
+  function handleTableChange() {
+    selectDatas([]);
+  }
+  function handleTreeCheck(checkedKeys) {
+    setCheckedTreeKeys(checkedKeys);
   }
   return (
     <Row gutter={16}>
       <Col span={16}>
         <div style={{ marginBottom: 16 }}>
-          <Row>
-            <Col span={3}>
+          <Row type="flex" justify="end">
+            <Col sm={3} xs={6}>
               <Button
                 type="primary"
+                className="fr"
               >
                 新增
               </Button>
             </Col>
-            <Col span={3}>
+            <Col sm={3} xs={6}>
               <Button
                 type="primary"
                 onClick={deleteDatas}
                 loading={deleteButtonLoading}
+                className="fr"
               >
                 删除
               </Button>
             </Col>
-            <Col span={3}>
+            <Col sm={3} xs={6}>
               <Button
                 type="primary"
+                className="fr"
               >
                 编辑
               </Button>
             </Col>
-            <Col span={3}>
+            <Col sm={3} xs={6}>
               <Button
                 type="primary"
                 onClick={saveDatas}
                 loading={saveButtonLoading}
+                className="fr"
               >
                 保存
               </Button>
@@ -163,6 +186,7 @@ const RoleSettingPage = ({
           dataSource={showData}
           size="middle"
           loading={tableLoading}
+          onChange={handleTableChange}
         />
       </Col>
       <Col span={8}>
@@ -178,9 +202,12 @@ const RoleSettingPage = ({
               </div>
               <Tree
                 checkable
+                checkStrictly
                 defaultExpandAll
+                onCheck={handleTreeCheck}
+                checkedKeys={checkedTreeKeys}
               >
-                {loop(treeData)}
+                {treeData}
               </Tree>
             </div>
         }
@@ -204,12 +231,20 @@ function mapDispatchToProps(dispatch) {
     },
     getTreeData: (record) => {
       dispatch({
+        type: 'roleSetting/queryRoleResources',
+        payload: record.id,
+      });
+    },
+    setCurrentSelectedRecord: (record) => {
+      dispatch({
         type: 'roleSetting/setCurrentSelectedRecord',
         payload: record,
       });
+    },
+    setCheckedTreeKeys: (checkedTreeKeys) => {
       dispatch({
-        type: 'roleSetting/queryRoleResources',
-        payload: record.id,
+        type: 'roleSetting/setCheckedTreeKeys',
+        payload: checkedTreeKeys,
       });
     },
     changeRoleDropDown: (dropDown) => {

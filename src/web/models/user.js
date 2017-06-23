@@ -1,3 +1,4 @@
+
 export default {
   namespace: 'user',
   state: JSON.parse(sessionStorage.getItem('user')) || {},
@@ -8,7 +9,7 @@ export default {
     },
     logout(state) {
       console.log(state);
-      sessionStorage.removeItem('user');
+      sessionStorage.clear();
       return {};
     },
   },

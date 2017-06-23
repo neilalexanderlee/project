@@ -1,43 +1,35 @@
 import React, { PropTypes } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 
 const { Content, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
-const MenuFrame = ({ menu, children, onCollapse }) => {
+export function loop(paramData) {
+  return paramData.map((item) => {
+    if (item.children) {
+      return (<SubMenu key={item.id} title={item.name}>
+        {loop(item.children)}
+      </SubMenu>);
+    }
+    return <Menu.Item key={item.id}><Link to={item.url}>{item.name}</Link></Menu.Item>;
+  });
+}
+
+const MenuFrame = ({ menu: { mode, collapsed, menuData }, children, onCollapse }) => {
   return (
     <Layout>
       <Sider
         collapsible
-        collapsed={menu.collapsed}
+        collapsed={collapsed}
         onCollapse={onCollapse}
-        width="227.66"
         breakpoint="sm"
-        collapsedWidth="113.83"
+        width={200}
+        collapsedWidth={100}
       >
-        <Menu theme="dark" mode={menu.mode} defaultSelectedKeys={['1']}>
-          <SubMenu
-            key="sub1"
-            title={<span><Icon type="user" /><span className="nav-text">User</span></span>}
-          >
-            <Menu.Item key="1">Tom</Menu.Item>
-            <Menu.Item key="2">Bill</Menu.Item>
-            <Menu.Item key="3">Alex</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={<span><Icon type="team" /><span className="nav-text">Team</span></span>}
-          >
-            <Menu.Item key="4">Team 1</Menu.Item>
-            <Menu.Item key="5">Team 2</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="6">
-            <span>
-              <Icon type="file" />
-              <span className="nav-text">File</span>
-            </span>
-          </Menu.Item>
+        <Menu theme="dark" mode={mode}>
+          {menuData}
         </Menu>
       </Sider>
       <Content>
