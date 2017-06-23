@@ -4,14 +4,14 @@ import { connect } from 'dva';
 
 const { TreeNode } = Tree;
 
-export function loop(paramData, checkedTreeKeys) {
+export function loopTreeData(paramData, checkedTreeKeys) {
   return paramData.map((item) => {
     if (item.granted === 'true') {
       checkedTreeKeys.push(item.id);
     }
     if (item.children) {
       return (<TreeNode title={item.name} key={item.id}>
-        {loop(item.children, checkedTreeKeys)}
+        {loopTreeData(item.children, checkedTreeKeys)}
       </TreeNode>);
     }
     return <TreeNode title={item.name} key={item.id} isLeaf={item.parentId !== '0'} />;
@@ -24,8 +24,6 @@ const RoleSettingPage = ({
     showData,
     treeData,
     selectedRowKeys,
-    deleteButtonLoading,
-    saveButtonLoading,
     roleFilterDropdownVisible,
     roleFiltered,
     roleSearchText,
@@ -34,19 +32,13 @@ const RoleSettingPage = ({
     currentSelectedRecord,
     checkedTreeKeys,
   },
-  setShowData,
+  updateState,
   getTreeData,
-  setCurrentSelectedRecord,
-  setCheckedTreeKeys,
-  changeRoleDropDown,
-  setRoleSearchText,
-  selectDatas,
-  deleteDatas,
-  saveDatas,
+  handleSelectChange,
 }) => {
   const rowSelection = {
     selectedRowKeys,
-    onChange: selectDatas,
+    onChange: handleSelectChange,
     onSelect,
   };
   const columns = [{
@@ -72,7 +64,7 @@ const RoleSettingPage = ({
     filterIcon: <Icon type="search" style={{ color: roleFiltered ? '#d73435' : '#108ee9' }} />,
     filterDropdownVisible: roleFilterDropdownVisible,
     onFilterDropdownVisibleChange: (visible) => {
-      changeRoleDropDown({
+      updateState({
         roleFilterDropdownVisible: visible,
       });
     },
@@ -87,15 +79,15 @@ const RoleSettingPage = ({
   }];
 
   function onInputChange(e) {
-    setRoleSearchText(e.target.value);
+    updateState({ roleSearchText: e.target.value });
   }
   function onRoleSearch() {
     const reg = new RegExp(roleSearchText, 'gi');
-    changeRoleDropDown({
+    updateState({
       roleFilterDropdownVisible: false,
       roleFiltered: !!roleSearchText,
     });
-    setShowData(data.map((record) => {
+    updateState({ showData: data.map((record) => {
       const match = record.role.match(reg);
       if (!match) {
         return null;
@@ -110,30 +102,31 @@ const RoleSettingPage = ({
           </span>
         ),
       };
-    }).filter(record => !!record));
+    }).filter(record => !!record) });
   }
   function onRowClick(record) {
     const index = selectedRowKeys.indexOf(record.id);
+    const stateData = {};
     if (index !== -1) {
       selectedRowKeys.splice(index, 1);
     } else {
       selectedRowKeys.push(record.id);
-      setCurrentSelectedRecord(record);
+      stateData.currentSelectedRecord = record;
       getTreeData(record);
     }
-    selectDatas(selectedRowKeys);
+    updateState({ ...stateData, selectedRowKeys });
   }
   function onSelect(record, selected) {
     if (selected) {
-      setCurrentSelectedRecord(record);
+      updateState({ currentSelectedRecord: record });
       getTreeData(record);
     }
   }
   function handleTableChange() {
-    selectDatas([]);
+    updateState({ selectedRowKeys: [] });
   }
   function handleTreeCheck(checkedKeys) {
-    setCheckedTreeKeys(checkedKeys);
+    updateState({ checkedTreeKeys: checkedKeys });
   }
   return (
     <Row gutter={16}>
@@ -151,8 +144,6 @@ const RoleSettingPage = ({
             <Col sm={3} xs={6}>
               <Button
                 type="primary"
-                onClick={deleteDatas}
-                loading={deleteButtonLoading}
                 className="fr"
               >
                 删除
@@ -169,8 +160,6 @@ const RoleSettingPage = ({
             <Col sm={3} xs={6}>
               <Button
                 type="primary"
-                onClick={saveDatas}
-                loading={saveButtonLoading}
                 className="fr"
               >
                 保存
@@ -223,68 +212,22 @@ function mapStateToProps({ roleSetting }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setShowData: (data) => {
+    updateState: (data) => {
       dispatch({
-        type: 'roleSetting/setShowData',
+        type: 'roleSetting/update',
         payload: data,
       });
     },
     getTreeData: (record) => {
       dispatch({
         type: 'roleSetting/queryRoleResources',
-        payload: record.id,
+        payload: { roleId: record.id },
       });
     },
-    setCurrentSelectedRecord: (record) => {
+    handleSelectChange: (selectedRowKeys) => {
       dispatch({
-        type: 'roleSetting/setCurrentSelectedRecord',
-        payload: record,
-      });
-    },
-    setCheckedTreeKeys: (checkedTreeKeys) => {
-      dispatch({
-        type: 'roleSetting/setCheckedTreeKeys',
-        payload: checkedTreeKeys,
-      });
-    },
-    changeRoleDropDown: (dropDown) => {
-      dispatch({
-        type: 'roleSetting/setRoleDropDown',
-        payload: dropDown,
-      });
-    },
-    setRoleSearchText: (text) => {
-      dispatch({
-        type: 'roleSetting/setRoleSearchText',
-        payload: text,
-      });
-    },
-    selectDatas: (selectedRowKeys) => {
-      dispatch({
-        type: 'roleSetting/select',
-        payload: selectedRowKeys,
-      });
-    },
-    saveDatas: () => {
-      dispatch({
-        type: 'roleSetting/setSaveLoading',
-        payload: true,
-      });
-
-      dispatch({
-        type: 'roleSetting/setSaveLoading',
-        payload: false,
-      });
-    },
-    deleteDatas: () => {
-      dispatch({
-        type: 'roleSetting/setDeleteLoading',
-        payload: true,
-      });
-
-      dispatch({
-        type: 'roleSetting/setDeleteLoading',
-        payload: false,
+        type: 'roleSetting/update',
+        payload: { selectedRowKeys },
       });
     },
   };

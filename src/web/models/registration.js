@@ -1,13 +1,26 @@
 
+const initialState = {
+  confirmDirty: false,
+};
+
 export default {
   namespace: 'registration',
-  state: {
-    confirmDirty: false,
+  state: initialState,
+  subscriptions: {
+    init({ dispatch, history }) {
+      history.listen(({ pathname }) => {
+        if (pathname === '/register') {
+          dispatch({ type: 'init' });
+        }
+      });
+    },
   },
   reducers: {
-    updateConfirmDirty(state, { payload: value }) {
-      const confirmDirty = state.confirmDirty || value;
-      return { ...state, confirmDirty };
+    init() {
+      return initialState;
+    },
+    update(state, { payload: data }) {
+      return { ...state, ...data };
     },
   },
 };

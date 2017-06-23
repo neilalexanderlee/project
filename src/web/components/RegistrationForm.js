@@ -6,7 +6,7 @@ import styles from './style/RegistrationForm.less';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-const RegistrationForm = ({ registration,
+const RegistrationForm = ({ registration: { confirmDirty },
   form: { getFieldDecorator, getFieldValue, validateFields },
   handleSubmit,
   handleConfirmBlur,
@@ -19,7 +19,7 @@ const RegistrationForm = ({ registration,
     }
   };
   const checkConfirm = (rule, value, callback) => {
-    if (value && registration.confirmDirty) {
+    if (value && confirmDirty) {
       validateFields(['confirm'], { force: true });
     }
     callback();
@@ -107,7 +107,7 @@ const RegistrationForm = ({ registration,
             validator: checkPassword,
           }],
         })(
-          <Input type="password" onBlur={handleConfirmBlur} />
+          <Input type="password" onBlur={e => confirmDirty || handleConfirmBlur(e)} />
         )}
       </FormItem>
       <FormItem
@@ -185,8 +185,8 @@ function mapDispatchToProps(dispatch, { form: { validateFieldsAndScroll } }) {
     handleConfirmBlur: (e) => {
       const value = e.target.value;
       dispatch({
-        type: 'registration/updateConfirmDirty',
-        payload: !!value,
+        type: 'registration/update',
+        payload: { confirmDirty: !!value },
       });
     },
   };

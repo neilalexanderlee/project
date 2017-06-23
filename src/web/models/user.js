@@ -1,7 +1,9 @@
 
+const initialState = JSON.parse(sessionStorage.getItem('user')) || {};
+
 export default {
   namespace: 'user',
-  state: JSON.parse(sessionStorage.getItem('user')) || {},
+  state: initialState,
   reducers: {
     login(state, { payload: user }) {
       sessionStorage.setItem('user', JSON.stringify(user));

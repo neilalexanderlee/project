@@ -1,27 +1,30 @@
 import { queryMenu } from '../services/menu';
-import { loop } from '../routes/MenuFrame';
+import { loopMenuData } from '../routes/MenuFrame';
+
+const initialState = {
+  collapsed: false,
+  mode: 'inline',
+  menuData: sessionStorage.getItem('menu') ? loopMenuData(JSON.parse(sessionStorage.getItem('menu'))) : [],
+};
 
 export default {
   namespace: 'menu',
-  state: {
-    collapsed: false,
-    mode: 'inline',
-    menuData: sessionStorage.getItem('menu') ? loop(JSON.parse(sessionStorage.getItem('menu'))) : [],
-  },
+  state: initialState,
   effects: {
     *queryMenu({ payload: userId }, { put, call }) {
+      yield put({ type: 'init' });
       const { data: { dataList } } = yield call(queryMenu, { userId });
       sessionStorage.setItem('menu', JSON.stringify(dataList));
-      const menuData = loop(dataList);
-      yield put({ type: 'setMenuData', payload: menuData });
+      const menuData = loopMenuData(dataList);
+      yield put({ type: 'update', payload: { menuData } });
     },
   },
   reducers: {
-    set(state, { payload: data }) {
-      return { ...state, ...data };
+    init() {
+      return initialState;
     },
-    setMenuData(state, { payload: menuData }) {
-      return { ...state, menuData };
+    update(state, { payload: data }) {
+      return { ...state, ...data };
     },
   },
 };

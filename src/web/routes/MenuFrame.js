@@ -6,11 +6,11 @@ import { Link } from 'dva/router';
 const { Content, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
-export function loop(paramData) {
+export function loopMenuData(paramData) {
   return paramData.map((item) => {
     if (item.children) {
       return (<SubMenu key={item.id} title={item.name}>
-        {loop(item.children)}
+        {loopMenuData(item.children)}
       </SubMenu>);
     }
     return <Menu.Item key={item.id}><Link to={item.url}>{item.name}</Link></Menu.Item>;
@@ -53,7 +53,7 @@ function mapStateToProps({ menu }) {
 function mapDispatchToProps(dispatch) {
   return {
     onCollapse: collapsed => dispatch({
-      type: 'menu/set',
+      type: 'menu/update',
       payload: {
         collapsed,
         mode: collapsed ? 'vertical' : 'inline',
