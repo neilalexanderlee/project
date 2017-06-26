@@ -4,15 +4,21 @@ const initialState = JSON.parse(sessionStorage.getItem('user')) || {};
 export default {
   namespace: 'user',
   state: initialState,
-  reducers: {
-    login(state, { payload: user }) {
+  effects: {
+    *login({ payload: user }, { put }) {
       sessionStorage.setItem('user', JSON.stringify(user));
-      return user;
+      yield put({
+        type: 'update',
+        payload: user,
+      });
     },
-    logout(state) {
-      console.log(state);
+    *logout() {
       sessionStorage.clear();
-      return {};
+    },
+  },
+  reducers: {
+    update(state, { payload: data }) {
+      return { ...state, ...data };
     },
   },
 };

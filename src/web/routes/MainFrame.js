@@ -89,7 +89,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: 'user/logout',
       });
-      location.reload();
     },
   };
 }

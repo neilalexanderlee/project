@@ -12,7 +12,6 @@ export default {
   state: initialState,
   effects: {
     *queryMenu({ payload: userId }, { put, call }) {
-      yield put({ type: 'init' });
       const { data: { dataList } } = yield call(queryMenu, { userId });
       sessionStorage.setItem('menu', JSON.stringify(dataList));
       const menuData = loopMenuData(dataList);
@@ -20,9 +19,6 @@ export default {
     },
   },
   reducers: {
-    init() {
-      return initialState;
-    },
     update(state, { payload: data }) {
       return { ...state, ...data };
     },
