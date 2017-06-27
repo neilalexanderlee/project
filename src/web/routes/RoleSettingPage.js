@@ -1,6 +1,9 @@
 import React from 'react';
 import { Row, Col, Button, Table, Icon, Input, Tree } from 'antd';
 import { connect } from 'dva';
+import BasicModal from '../components/BasicModal';
+import TableForm from '../components/TableForm';
+import EditableCell from '../components/EditableCell';
 
 const { TreeNode } = Tree;
 
@@ -31,11 +34,15 @@ const RoleSettingPage = ({
     treeLoading,
     currentSelectedRecord,
     checkedTreeKeys,
+    modalTitle,
+    modalVisitable,
+    modalData,
   },
   updateState,
   getTreeData,
   handleSelectChange,
 }) => {
+  let form;
   const rowSelection = {
     selectedRowKeys,
     onChange: handleSelectChange,
@@ -43,8 +50,10 @@ const RoleSettingPage = ({
   };
   const columns = [{
     title: '角色',
+    width: '25%',
     dataIndex: 'role',
     key: 'role',
+    editType: 'text',
     filterDropdown: (
       <div className="custom-filter-dropdown">
         <Input
@@ -68,16 +77,38 @@ const RoleSettingPage = ({
         roleFilterDropdownVisible: visible,
       });
     },
+    render: (text, record) => (
+      <EditableCell
+        value={text}
+        editType="text"
+        onChange={onCellChange(record, 'role')}
+      />
+     ),
   }, {
     title: '备注',
+    width: '50%',
     dataIndex: 'remark',
     key: 'remark',
+    editType: 'textarea',
+    render: (text, record) => (
+      <EditableCell
+        value={text}
+        editType="textarea"
+        onChange={onCellChange(record, 'remark')}
+      />
+    ),
   }, {
     title: '创建时间',
+    width: '25%',
     dataIndex: 'createTime',
     key: 'createTime',
   }];
-
+  function onCellChange(record, key) {
+    return (value) => {
+      // 使用ES6的属性名表达式,使用大括号定义对象时,把属性的表达式放在方括号内
+      console.log('接收到参数', { ...record, ...{ [key]: value } });
+    };
+  }
   function onInputChange(e) {
     updateState({ roleSearchText: e.target.value });
   }
@@ -123,10 +154,36 @@ const RoleSettingPage = ({
     }
   }
   function handleTableChange() {
-    updateState({ selectedRowKeys: [] });
+    updateState({
+      selectedRowKeys: [],
+      currentSelectedRecord: {},
+      treeData: [],
+    });
   }
   function handleTreeCheck(checkedKeys) {
     updateState({ checkedTreeKeys: checkedKeys });
+  }
+  function handleModalOk() {
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      console.log('Received values of form: ', values);
+
+      updateState({
+        modalVisitable: false,
+      });
+    });
+  }
+  function handleModalCancel() {
+    form.resetFields();
+    updateState({
+      modalVisitable: false,
+    });
+  }
+  function saveFormRef(e) {
+    form = e;
   }
   return (
     <Row gutter={16}>
@@ -137,6 +194,13 @@ const RoleSettingPage = ({
               <Button
                 type="primary"
                 className="fr"
+                onClick={() => {
+                  updateState({
+                    modalTitle: '新增',
+                    modalVisitable: true,
+                    modalData: {},
+                  });
+                }}
               >
                 新增
               </Button>
@@ -147,14 +211,6 @@ const RoleSettingPage = ({
                 className="fr"
               >
                 删除
-              </Button>
-            </Col>
-            <Col sm={3} xs={6}>
-              <Button
-                type="primary"
-                className="fr"
-              >
-                编辑
               </Button>
             </Col>
             <Col sm={3} xs={6}>
@@ -177,6 +233,15 @@ const RoleSettingPage = ({
           loading={tableLoading}
           onChange={handleTableChange}
         />
+        <BasicModal
+          title={modalTitle}
+          visible={modalVisitable}
+          onOk={handleModalOk}
+          onCancel={handleModalCancel}
+          okText="保存"
+        >
+          <TableForm formData={modalData} columns={columns} ref={saveFormRef} />
+        </BasicModal>
       </Col>
       <Col span={8}>
         {treeLoading
@@ -201,7 +266,8 @@ const RoleSettingPage = ({
             </div>
         }
       </Col>
-    </Row>);
+    </Row>
+  );
 };
 
 function mapStateToProps({ roleSetting }) {

@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import React, { PropTypes } from 'react';
 import styles from './style/LoginForm.less';
 
-const FormItem = Form.Item;
+const { Item: FormItem } = Form;
 
 const LoginForm = ({ form: { getFieldDecorator }, handleSubmit }) => {
   return (

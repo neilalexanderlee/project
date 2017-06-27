@@ -6,8 +6,9 @@ const initialState = {
   showData: [],
   treeData: [],
   selectedRowKeys: [],  // Check here to configure the default column
-  deleteButtonLoading: false,
-  saveButtonLoading: false,
+  deleteButtonLoading: false, // 删除按钮loading
+  saveButtonLoading: false, // 保存按钮loading
+  confirmLoading: false, // 对话框确认按钮loaing
   roleFilterDropdownVisible: false,
   roleFiltered: false,
   roleSearchText: '',
@@ -15,6 +16,9 @@ const initialState = {
   treeLoading: false,
   currentSelectedRecord: {},
   checkedTreeKeys: [],
+  modalTitle: '',
+  modalVisitable: false,
+  modalData: {},
 };
 
 export default {
