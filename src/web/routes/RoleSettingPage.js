@@ -135,7 +135,7 @@ const RoleSettingPage = ({
       };
     }).filter(record => !!record) });
   }
-  function onRowClick(record) {
+  /* function onRowClick(record) {
     const index = selectedRowKeys.indexOf(record.id);
     const stateData = {};
     if (index !== -1) {
@@ -146,7 +146,7 @@ const RoleSettingPage = ({
       getTreeData(record);
     }
     updateState({ ...stateData, selectedRowKeys });
-  }
+  } */
   function onSelect(record, selected) {
     if (selected) {
       updateState({ currentSelectedRecord: record });
@@ -226,7 +226,6 @@ const RoleSettingPage = ({
         <Table
           rowKey="id"
           rowSelection={rowSelection}
-          onRowClick={onRowClick}
           columns={columns}
           dataSource={showData}
           size="middle"
