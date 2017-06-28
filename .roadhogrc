@@ -7,12 +7,14 @@
       "extraBabelPlugins": [
         "dva-hmr",
         "transform-runtime",
+        "lodash",
         ["import", { "libraryName": "antd", "style": "css" }]
       ]
     },
     "production": {
       "extraBabelPlugins": [
         "transform-runtime",
+        "lodash",
         ["import", { "libraryName": "antd", "style": "css" }]
       ]
     }

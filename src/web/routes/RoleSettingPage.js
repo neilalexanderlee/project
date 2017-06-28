@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Row, Col, Button, Table, Icon, Input, Tree } from 'antd';
 import { connect } from 'dva';
 import BasicModal from '../components/BasicModal';
@@ -123,7 +124,7 @@ const RoleSettingPage = ({
       if (!match) {
         return null;
       }
-      return {
+      /* return {
         ...record,
         role: (
           <span>
@@ -132,7 +133,8 @@ const RoleSettingPage = ({
             ))}
           </span>
         ),
-      };
+      }; */
+      return record;
     }).filter(record => !!record) });
   }
   /* function onRowClick(record) {
@@ -213,14 +215,6 @@ const RoleSettingPage = ({
                 删除
               </Button>
             </Col>
-            <Col sm={3} xs={6}>
-              <Button
-                type="primary"
-                className="fr"
-              >
-                保存
-              </Button>
-            </Col>
           </Row>
         </div>
         <Table
@@ -249,20 +243,36 @@ const RoleSettingPage = ({
               <Icon type="loading" />
             </div>
           :
-            <div>
-              <div style={{ margin: 16, fontSize: 16, background: '#fff', textAlign: 'center' }}>
-                {currentSelectedRecord.role ? `${currentSelectedRecord.role}的菜单权限` : null}
+           _.isEmpty(treeData)
+             ?
+              null
+             :
+              <div>
+                <div style={{ margin: '0 16px 16px 16px' }}>
+                  <Row type="flex" justify="end">
+                    <Col span={12}>
+                      <Button
+                        type="primary"
+                        className="fr"
+                      >
+                        保存
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
+                <div style={{ margin: 16, fontSize: 16, background: '#fff', textAlign: 'center' }}>
+                  {currentSelectedRecord.role ? `${currentSelectedRecord.role}的菜单权限` : null}
+                </div>
+                <Tree
+                  checkable
+                  checkStrictly
+                  defaultExpandAll
+                  onCheck={handleTreeCheck}
+                  checkedKeys={checkedTreeKeys}
+                >
+                  {treeData}
+                </Tree>
               </div>
-              <Tree
-                checkable
-                checkStrictly
-                defaultExpandAll
-                onCheck={handleTreeCheck}
-                checkedKeys={checkedTreeKeys}
-              >
-                {treeData}
-              </Tree>
-            </div>
         }
       </Col>
     </Row>
