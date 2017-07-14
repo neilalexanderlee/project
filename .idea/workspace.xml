@@ -34,7 +34,7 @@
       <file leaf-file-name="RoleSettingPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/web/routes/RoleSettingPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
+            <state relative-caret-position="0">
               <caret line="49" column="13" lean-forward="false" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
               <folding />
             </state>
@@ -57,7 +57,7 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="0">
               <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
               <folding />
             </state>
@@ -67,7 +67,7 @@
       <file leaf-file-name="TestJunit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/group/test/TestJunit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="0">
               <caret line="30" column="9" lean-forward="false" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
               <folding />
             </state>
@@ -87,7 +87,7 @@
       <file leaf-file-name="project_war_exploded.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/artifacts/project_war_exploded.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="0">
               <caret line="6" column="41" lean-forward="false" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
               <folding />
             </state>
@@ -97,7 +97,7 @@
       <file leaf-file-name="project.iml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project.iml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
+            <state relative-caret-position="0">
               <caret line="38" column="53" lean-forward="false" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
               <folding />
             </state>
@@ -107,7 +107,7 @@
       <file leaf-file-name="MenuFrame.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/web/routes/MenuFrame.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
+            <state relative-caret-position="0">
               <caret line="65" column="0" lean-forward="false" selection-start-line="60" selection-start-column="7" selection-end-line="65" selection-end-column="0" />
               <folding />
             </state>
@@ -117,7 +117,7 @@
       <file leaf-file-name="UserSettingPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/web/routes/UserSettingPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="0">
               <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
@@ -127,7 +127,7 @@
       <file leaf-file-name="MainFrame.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/web/routes/style/MainFrame.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="0">
               <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
@@ -1019,7 +1019,7 @@
       <workItem from="1500010558595" duration="524000" />
       <workItem from="1500011469207" duration="194000" />
       <workItem from="1500012139971" duration="1465000" />
-      <workItem from="1500015381511" duration="176000" />
+      <workItem from="1500015381511" duration="228000" />
     </task>
     <task id="LOCAL-00001" summary="初次上传">
       <created>1491543050646</created>
@@ -1259,7 +1259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500015401807</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="新增登录控制">
+      <created>1500015569760</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1500015569760</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1295,7 +1302,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375764000" />
+    <option name="totallyTimeSpent" value="375816000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1635,7 +1642,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/web/routes/MenuFrame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
+        <state relative-caret-position="0">
           <caret line="65" column="0" lean-forward="false" selection-start-line="60" selection-start-column="7" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
@@ -1650,7 +1657,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/web/routes/UserSettingPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="0">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
@@ -1665,7 +1672,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/web/routes/style/MainFrame.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="0">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
@@ -1673,7 +1680,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/web/routes/RoleSettingPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
+        <state relative-caret-position="0">
           <caret line="49" column="13" lean-forward="false" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
           <folding />
         </state>
@@ -1681,7 +1688,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
+        <state relative-caret-position="0">
           <caret line="38" column="53" lean-forward="false" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
           <folding />
         </state>
@@ -1700,7 +1707,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="0">
           <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
           <folding />
         </state>
@@ -1715,7 +1722,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/group/test/TestJunit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="0">
           <caret line="30" column="9" lean-forward="false" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
           <folding />
         </state>
@@ -1723,7 +1730,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/artifacts/project_war_exploded.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="0">
           <caret line="6" column="41" lean-forward="false" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
           <folding />
         </state>
