@@ -1,4 +1,4 @@
-## Project
+## project
 
 ### 技术栈
 * react
