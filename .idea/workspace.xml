@@ -1019,7 +1019,7 @@
       <workItem from="1500010558595" duration="524000" />
       <workItem from="1500011469207" duration="194000" />
       <workItem from="1500012139971" duration="1465000" />
-      <workItem from="1500015381511" duration="228000" />
+      <workItem from="1500015381511" duration="238000" />
     </task>
     <task id="LOCAL-00001" summary="初次上传">
       <created>1491543050646</created>
@@ -1266,7 +1266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500015569760</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="新增登录控制">
+      <created>1500015614681</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1500015614681</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1302,7 +1309,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375816000" />
+    <option name="totallyTimeSpent" value="375826000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
